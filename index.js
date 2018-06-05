@@ -1,4 +1,3 @@
-const lorem = ["Lorem ipsum", "dolor sit", "amet", "consectetur", "adipiscing elit"]
 
 if (window.commaship) {
   commaship.register('World Greeter', [
