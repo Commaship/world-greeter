@@ -17,9 +17,33 @@ if (window.commaship) {
           const newOptions = repos.map(r => ({
             label: r.name,
             description: r.description,
-            action: () => alert(`${r.name} has ${r.stargazers_count} stars.`)
+            action: () => `${r.name} has ${r.stargazers_count} stars.`
           }))
           resolve(newOptions)
+        })
+      }
+    },
+    {
+      id: 'user-interaction-example',
+      label: 'User interaction example',
+      description: 'This is a demo for user interaction dialogues',
+      action: function () {
+        return new commaship.Dialogue(function*() {
+          const name      = yield(new commaship.Question('What\'s your first name?'))
+          const lastname  = yield(new commaship.Question('What\'s your last name?'))
+
+          yield `That's a very nice name, ${name} ${lastname}!`
+
+          let count = parseInt(yield (new commaship.Question('How many times do you want to be greeted?')))
+
+          if(count > 5 || count < 1) {
+            yield `I'll just greet you 5 times, ${name}!`
+            count = 5
+          }
+
+          for(let i = 0; i < count; i++) {
+            alert(`Hello ${name} ${lastname}`)
+          }
         })
       }
     }
