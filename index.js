@@ -29,21 +29,24 @@ if (window.commaship) {
       description: 'This is a demo for user interaction dialogues',
       action: function () {
         return new commaship.Dialogue(function*() {
-          const name      = yield(new commaship.Question('What\'s your first name?'))
-          const lastname  = yield(new commaship.Question('What\'s your last name?'))
+          const name      = yield new commaship.Question('What\'s your first name?')
+          const lastname  = yield new commaship.Question('What\'s your last name?')
 
           yield `That's a very nice name, ${name} ${lastname}!`
 
-          let count = parseInt(yield (new commaship.Question('How many times do you want to be greeted?')))
+          let count = parseInt(yield new commaship.Question('How many times do you want to be greeted?'))
 
-          if(count > 5 || count < 1) {
-            yield `I'll just greet you 5 times, ${name}!`
-            count = 5
+          if(count < 1) {
+            yield `I'll just greet you a 100 times, ${name}!`
+            count = 100
           }
 
+          let greetings = ''
           for(let i = 0; i < count; i++) {
-            alert(`Hello ${name} ${lastname}`)
+            greetings += `Hello ${name} ${lastname}\n`
           }
+          return greetings
+
         })
       }
     }
